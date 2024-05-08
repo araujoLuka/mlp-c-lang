@@ -20,7 +20,8 @@ void neuron_init(neuron_t* neuron, int n_inputs);
  */
 neuron_t* neuron_create(int n_inputs) {
     neuron_t* neuron = neuron_alloc(n_inputs);
-    if (neuron == NULL) return NULL;
+    if (neuron == NULL) 
+        return NULL;
     neuron_init(neuron, n_inputs);
 
     return neuron;

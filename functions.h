@@ -9,6 +9,6 @@
 #ifndef __FUNCTIONS_H__
 #define __FUNCTIONS_H__
 
-void ReLU(struct Layer* layer, float* inputs);
+float ReLU(float input);
 
 #endif

@@ -2,7 +2,7 @@
 // Layer structure and functions to manage the layer
 
 /* Author: Lucas C. Araujo
- * Date: 2024-05-06
+ * Date: 2024-05-08
  * Version: 1.0
  */
 
@@ -16,42 +16,44 @@ typedef struct Neuron neuron_t;
 
 typedef struct Layer {
     int n_neurons;
-    neuron_t* neurons;
+    neuron_t** neurons;
     // Activation function pointer
     // - Allowing to use different functions (future feature)
-    void (*activation)(struct Layer* layer, float* inputs);
+    float (*activation)(float input);
     float* outputs;
 } layer_t;
 
-/*
- * Create a new layer with n_neurons and storing the activation function
- * - If no activation function is provided, the default is ReLU
- *   > There's some functions implemented in functions.h
- * - If a custom activation function is provided, the user is responsible for
- *   implementing the function and passing it as a parameter
- * - If n_neurons is 0 or lower, the neurons' list will be NULL
+/** @brief Create a layer of neurons
+ *
+ * This function creates a layer of neurons with the specified number of
+ * inputs and neurons. The activation function is also set.
+ *
+ * @param n_inputs Number of inputs of the layer
+ * @param n_neurons Number of neurons of the layer
+ * @param activation Activation function of the layer
+ * @return A pointer to the layer created
  */
-layer_t* layer_create(int n_neurons, void (*activation)(layer_t*, float*));
+layer_t* layer_create(int n_inputs, int n_neurons, float (*activation)(float));
 
-// Feed forward the inputs through the layer and store the outputs
-void layer_forward(layer_t* layer, float* inputs);
-
-// Insert a neuron in the layer at the end of the list
-void layer_insert_neuron(layer_t* layer, neuron_t* neuron);
-
-// Insert a neuron in the layer at the specified index
-void layer_insert_at(layer_t* layer, neuron_t* neuron, int index);
-
-/*
- * Print the layer's information
- * - Layer's address
- * - Number of neurons
- * - Output values
- * Use the index parameter to print the layer's index in the network
+/** @brief Destroy a layer
+ *
+ * This function frees the memory allocated for a layer and its neurons.
+ *
+ * @param layer Pointer to the layer to be destroyed
  */
-void layer_print(layer_t* layer, int index);
-
-// Free the memory allocated for the layer
 void layer_destroy(layer_t* layer);
+
+/** @brief Computes the output of a layer
+ *
+ * This function computes the output of a layer given the inputs.
+ * The output of each neuron is computed using the activation function
+ * that was set when the layer was created.
+ * All outputs are stored in the layer.
+ *
+ * @param layer Pointer to the layer
+ * @param inputs Array with the inputs
+ * @return 0 if success, negative value otherwise
+ */
+int layer_forward(layer_t* layer, float* inputs);
 
 #endif
