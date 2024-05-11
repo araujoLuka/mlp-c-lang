@@ -10,9 +10,7 @@
 #define __LAYER_H__
 
 #include "functions.h"
-
-// Forward declaration to avoid including neuron.h
-typedef struct Neuron neuron_t;
+#include "neuron.h"
 
 typedef struct Layer {
     int n_neurons;
@@ -52,8 +50,8 @@ void layer_destroy(layer_t* layer);
  *
  * @param layer Pointer to the layer
  * @param inputs Array with the inputs
- * @return 0 if success, negative value otherwise
+ * @return the output of the layer
  */
-int layer_forward(layer_t* layer, float* inputs);
+float* layer_forward(layer_t* layer, float* inputs);
 
 #endif

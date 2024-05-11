@@ -10,8 +10,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "neuron.h"
-
 // Private functions
 neuron_t** layer_create_neurons(int n_inputs, int n_neurons);
 layer_t* layer_alloc(int n_inputs, int n_neurons);
@@ -60,17 +58,17 @@ void layer_destroy(layer_t* layer) {
  *
  * @param layer Pointer to the layer
  * @param inputs Array with the inputs
- * @return 0 if success, negative value otherwise
+ * @return the output of the layer
  */
-int layer_forward(layer_t* layer, float* inputs) {
+float* layer_forward(layer_t* layer, float* inputs) {
     int val = validate_params(layer, inputs);
-    if (val < 0) return val;
+    if (val < 0) return NULL;
 
     for (int i = 0; i < layer->n_neurons; ++i)
         layer->outputs[i] =
             neuron_output(layer->neurons[i], inputs, layer->activation);
 
-    return 0;
+    return layer->outputs;
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
