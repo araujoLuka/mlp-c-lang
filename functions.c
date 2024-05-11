@@ -1,15 +1,15 @@
-/** @file functions.h
- * @brief Activation functions
- * @details This file contains the definition of the ReLU activation function.
+/** @file functions.c
+ * @brief Implementation of the functions module
+ *
+ * This file implements the functions defined in functions.h.
  */
 
 /* Author: Lucas C. Araujo
- * Date: 2024-05-06
+ * Date: 2024-05-11
  * Version: 1.0
  */
 
-#ifndef __FUNCTIONS_H__
-#define __FUNCTIONS_H__
+#include "functions.h"
 
 /** @brief Computes the ReLU function
  *
@@ -19,7 +19,7 @@
  * @param x The input value
  * @return The output of the ReLU function
  */
-float ReLU(float input);
+float ReLU(float x) { return x > 0 ? x : 0; }
 
 /** @brief Computes the derivative of the ReLU function
  *
@@ -29,6 +29,4 @@ float ReLU(float input);
  * @param x The input value
  * @return The output of the derivative of the ReLU function
  */
-float step(float input);
-
-#endif
+float step(float x) { return x > 0 ? 1 : 0; }
