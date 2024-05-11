@@ -1,6 +1,6 @@
-# Neural Network Library in C
+# Biblioteca de Redes Neurais em C
 
-Este é um projeto em C para a implementação de uma biblioteca de redes neurais simples. Atualmente, o projeto inclui a implementação básica de um neurônio, que pode ser usado como parte de uma rede neural mais complexa.
+Este é um projeto em C para a implementação de uma biblioteca de redes neurais simples. Atualmente, o projeto inclui a implementação básica de um neurônio, bem como as estruturas de camada (layer) e rede neural (network).
 
 ## Estrutura do Projeto
 
@@ -8,54 +8,30 @@ O projeto é estruturado da seguinte forma:
 
 - `neuron.h`: O arquivo de cabeçalho contendo a definição da estrutura de neurônio e as funções para criar, calcular a saída e destruir um neurônio.
 - `neuron.c`: A implementação das funções definidas em `neuron.h`.
-- `functions.h`: O arquivo de cabeçalho contendo definições de funções de ativação para uso em neurônios (como ReLU, sigmoid, etc.).
+- `layer.h`: O arquivo de cabeçalho contendo a definição da estrutura de camada e as funções para criar, calcular a saída e destruir uma camada.
+- `layer.c`: A implementação das funções definidas em `layer.h`.
+- `network.h`: O arquivo de cabeçalho contendo a definição da estrutura de rede neural e as funções para criar, adicionar camadas e propagar entradas pela rede.
+- `network.c`: A implementação das funções definidas em `network.h`.
+- `functions.h`: O arquivo de cabeçalho contendo definições de funções de ativação para uso em neurônios.
 - `functions.c`: A implementação das funções de ativação definidas em `functions.h`.
 
 ## Bibliotecas
 
 ### Neuron
 
-Para essa biblioteca foi desenvolvido as alocações da estrutura do neurônio, bem como o cálculo da saída do neurônio usando o ponteiro para a função de ativação com o produto interno da entrada com os pesos do neurônio.
+Para essa biblioteca, foram desenvolvidas as alocações da estrutura do neurônio, bem como o cálculo da saída do neurônio usando o ponteiro para a função de ativação com o produto interno da entrada com os pesos do neurônio.
 
-## Estruturas de Dados
+### Layer
 
-### Neuron
+Nesta biblioteca, foram implementadas as estruturas e funções relacionadas às camadas da rede neural. Isso inclui a criação, computação da saída e destruição de camadas, bem como a alocação de memória para armazenar as saídas das camadas.
 
-A estrutura de dados `neuron_t` representa um neurônio em uma rede neural. Ela contém as seguintes informações:
-- `n_inputs`: o número de entradas do neurônio.
-- `weights`: um array de floats representando os pesos associados a cada entrada do neurônio.
-- `bias`: o valor do viés (bias) do neurônio.
-- `delta`: o valor do delta associado ao neurônio para uso em algoritmos de aprendizado de máquina.
+### Network
+
+A biblioteca de rede neural inclui funcionalidades para criar uma rede neural a partir de camadas, adicionar camadas à rede e propagar entradas pela rede neural. Isso permite a construção e uso de redes neurais multicamadas.
 
 ## Uso
 
-Para usar a biblioteca, basta incluir o arquivo de cabeçalho `neuron.h` em seu código fonte e linkar com o arquivo objeto `neuron.o` gerado pela compilação de `neuron.c`.
-
-Aqui está um exemplo básico de como criar, calcular a saída e destruir um neurônio:
-
-```c
-#include <stdio.h>
-#include "neuron.h"
-
-int main() {
-    // Criar um neurônio com 3 inputs
-    neuron_t* neuron = neuron_create(3);
-
-    // Definir inputs
-    float inputs[] = {0.5, 0.3, 0.2};
-
-    // Calcular a saída do neurônio usando a função de ativação ReLU
-    float output = neuron_output(neuron, inputs, ReLU);
-
-    // Exibir a saída calculada
-    printf("Output: %f\n", output);
-
-    // Destruir o neurônio para liberar memória
-    neuron_destroy(neuron);
-
-    return 0;
-}
-```
+Para usar a biblioteca, basta incluir os arquivos de cabeçalho necessários em seu código fonte e linkar com os arquivos objetos gerados pela compilação dos respectivos arquivos de código-fonte.
 
 ## Contribuição
 
@@ -68,4 +44,3 @@ Este projeto é uma implementação de uma MLP (Multilayer Perceptron) desenvolv
 ## Licença
 
 Este projeto é licenciado sob a [MIT License](LICENSE).
-
